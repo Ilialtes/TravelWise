@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 export default function Home() {
   const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! How can I assist you today?" },
+    { role: "assistant", content: "Hello! How can I assist you today?" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export default function Home() {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    setMessages((prev) => [...prev, { sender: "user", text: input }]);
+    setMessages((prev) => [...prev, { role: "user", content: input }]);
     setInput("");
     setLoading(true);
 
@@ -28,21 +28,25 @@ export default function Home() {
         throw new Error(data.message || "Error communicating with the API.");
       }
 
-      setMessages((prev) => [...prev, { sender: "bot", text: data.response }]);
+      // Add the assistant's response to the chat
+      setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
     } catch (error) {
       console.error("Error during prediction:", error);
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "Sorry, I encountered an error. Please try again later." },
+        {
+          role: "assistant",
+          content: "Sorry, I encountered an error. Please try again later.",
+        },
       ]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: { key: string; preventDefault: () => void; }) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Prevent default form submission
+      e.preventDefault(); 
       handleSend();
     }
   };
@@ -50,21 +54,21 @@ export default function Home() {
   return (
     <section className="min-h-screen flex items-center justify-center bg-teal-50 p-4">
       <div className="bg-white shadow-md rounded p-8 w-full max-w-3xl">
-        <h2 className="text-3xl font-bold mb-4 text-teal-800">Dashboard</h2>
+        <h2 className="text-3xl font-bold mb-4 text-teal-800">Chat Dashboard</h2>
         <div className="border border-teal-300 rounded p-4 h-96 overflow-y-auto bg-teal-100">
           {messages.map((msg, index) => (
             <div
               key={index}
               className={`mb-2 ${
-                msg.sender === "bot" ? "text-left text-teal-800" : "text-right text-teal-600"
+                msg.role === "assistant" ? "text-left text-teal-800" : "text-right text-teal-600"
               }`}
             >
               <p
                 className={`inline-block px-4 py-2 rounded ${
-                  msg.sender === "bot" ? "bg-teal-200" : "bg-teal-300"
+                  msg.role === "assistant" ? "bg-teal-200" : "bg-teal-300"
                 }`}
               >
-                {msg.text}
+                {msg.content}
               </p>
             </div>
           ))}
@@ -74,10 +78,10 @@ export default function Home() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown} // Submit on Enter key press
+            onKeyDown={handleKeyDown} 
             placeholder="Type your message..."
             className="flex-1 px-4 py-2 border border-teal-300 rounded-l focus:outline-none focus:ring-0 focus:border-teal-300 text-black"
-            />
+          />
           <button
             onClick={handleSend}
             disabled={loading}

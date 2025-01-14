@@ -6,7 +6,7 @@ export async function POST(req) {
     const body = await req.json();
     const { message } = body;
 
-    if (!message) {
+    if (!message || message.trim() === "") {
       return NextResponse.json({ message: "Message is required" }, { status: 400 });
     }
 
@@ -14,10 +14,10 @@ export async function POST(req) {
 
     const result = await client.predict("/chat", {
       message,
-      system_message: "You are a friendly Chatbot.",
-      max_tokens: 500,
-      temperature: 0.7,
-      top_p: 0.9,
+      system_message: "You are a friendly Chatbot.", 
+      max_tokens: 500, 
+      temperature: 0.7, 
+      top_p: 0.9, 
     });
 
     return NextResponse.json({ response: result.data }, { status: 200 });
