@@ -4,25 +4,42 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { message } = body;
+    const { prompt } = body;
 
-    if (!message || message.trim() === "") {
-      return NextResponse.json({ message: "Message is required" }, { status: 400 });
+    console.log("Received request body:", body);
+
+    if (!prompt || prompt.trim() === "") {
+      console.warn("No prompt provided in request body.");
+      return NextResponse.json({ message: "Prompt is required" }, { status: 400 });
     }
 
+    console.log(prompt);
+    console.log("Connecting to Gradio Space...");
     const client = await Client.connect("Ilialtes/test");
+    console.log("Connected to Gradio Space.");
 
-    const result = await client.predict("/chat", {
-      message,
-      system_message: "You are a friendly Chatbot.", 
-      max_tokens: 500, 
-      temperature: 0.7, 
-      top_p: 0.9, 
+    console.log("Sending data to Gradio Space...");
+    const result = await client.predict("/predict", {
+      prompt: prompt.trim(),
     });
 
-    return NextResponse.json({ response: result.data }, { status: 200 });
+    console.log("Received response from Gradio Space:", result);
+
+    if (result?.data?.[0]) {
+      const response = result.data[0];
+      const sanitizedResponse = response.replace(prompt.trim(), "").trim();
+
+      return NextResponse.json({ response: sanitizedResponse }, { status: 200 });
+    } else {
+      console.error("Unexpected result structure:", result);
+      return NextResponse.json(
+        { message: "Unexpected result structure from Gradio Space." },
+        { status: 500 }
+      );
+    }
   } catch (error) {
     console.error("Error in API route:", error);
+
     return NextResponse.json(
       { message: "Internal server error", error: error.message },
       { status: 500 }

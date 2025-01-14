@@ -20,7 +20,7 @@ export default function Home() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ prompt: input }),
       });
 
       const data = await response.json();
@@ -46,7 +46,7 @@ export default function Home() {
 
   const handleKeyDown = (e: { key: string; preventDefault: () => void; }) => {
     if (e.key === "Enter") {
-      e.preventDefault(); 
+      e.preventDefault();
       handleSend();
     }
   };
@@ -78,7 +78,7 @@ export default function Home() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown} 
+            onKeyDown={handleKeyDown}
             placeholder="Type your message..."
             className="flex-1 px-4 py-2 border border-teal-300 rounded-l focus:outline-none focus:ring-0 focus:border-teal-300 text-black"
           />
