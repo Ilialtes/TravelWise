@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "Travel-wise-web/package.json",
+        "src": "travel-wise-web/package.json",
         "use": "@vercel/static-build",
         "config": {
           "distDir": "build"
@@ -12,7 +12,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "Travel-wise-web/build/$1"
+        "dest": "travel-wise-web/build/$1"
       }
     ]
   }
