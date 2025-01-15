@@ -56,7 +56,7 @@ const Header = () => {
           >
             About
           </Link>
-          {/* {user ? (
+          {user ? (
             <button
               onClick={handleSignOut}
               className="hover:underline text-lg hover:scale-105 transition-transform font-bold"
@@ -67,7 +67,7 @@ const Header = () => {
             <Link href="/login" className="hover:underline text-lg font-bold">
               Login
             </Link>
-          )} */}
+          )}
         </nav>
       </div>
     </div>
