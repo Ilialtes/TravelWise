@@ -12,7 +12,7 @@ export async function POST(req) {
       return NextResponse.json({ message: "Prompt is required" }, { status: 400 });
     }
 
-    const client = await Client.connect("Ilialtes/test");
+    const client = await Client.connect("jsandinoDev/Travel_Wise_GPT2");
 
     const result = await client.predict("/predict", {
       prompt: prompt.trim(),

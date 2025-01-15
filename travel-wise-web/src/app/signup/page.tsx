@@ -25,26 +25,26 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-teal-50 p-4">
-      <main className="w-full max-w-md p-8 bg-white shadow-md rounded-md">
-        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Create Account</h1>
-        <form onSubmit={handleSignup} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
+    <section className="min-h-screen flex items-center justify-center bg-teal-50 p-4">
+      <div className="bg-white shadow-lg rounded p-8 w-full max-w-md">
+        <h2 className="text-3xl font-bold mb-6 text-teal-800">Create Account</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <form onSubmit={handleSignup}>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-teal-700 font-medium mb-2">
+              Email Address
             </label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              className="w-full px-3 py-2 border border-teal-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
               placeholder="Enter your email"
-              required
             />
           </div>
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-teal-700 font-medium mb-2">
               Password
             </label>
             <input
@@ -52,15 +52,13 @@ const Signup = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              className="w-full px-3 py-2 border border-teal-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500 text-black"
               placeholder="Enter your password"
-              required
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             Sign Up
           </button>
@@ -76,8 +74,8 @@ const Signup = () => {
             </button>
           </p>
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 };
 
