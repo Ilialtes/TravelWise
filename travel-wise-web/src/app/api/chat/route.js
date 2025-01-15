@@ -20,9 +20,8 @@ export async function POST(req) {
 
     if (result?.data?.[0]) {
       const response = result.data[0];
-      const sanitizedResponse = response.replace(prompt.trim(), "").trim();
 
-      return NextResponse.json({ response: sanitizedResponse }, { status: 200 });
+      return NextResponse.json({ response: response }, { status: 200 });
     } else {
       console.error("Unexpected result structure:", result);
       return NextResponse.json(
