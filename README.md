@@ -13,6 +13,8 @@
 TravelWise is an AI-powered assistant designed to make your travel experiences seamless and enjoyable. From checking current prices and exploring tours to suggesting must-visit attractions, TravelWise ensures you have all the information you need at your fingertips. 
 > This project is an AI Travel Assistant built for [Nosu AI Hackathon](https://nosu-ai-hackathon.devpost.com/?ref_content=default&ref_feature=challenge&ref_medium=portfolio).
 
+> At the moment the model is trained only for Costa Rica.
+
 
 ---
 
