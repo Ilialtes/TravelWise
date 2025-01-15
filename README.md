@@ -20,7 +20,7 @@ TravelWise is an AI-powered assistant designed to make your travel experiences s
 
 ## Technologies Used
 - **Model**: [TravelWise Model](https://huggingface.co/jsandinoDev/TravelWise_gpt2)
-- **Training Environment**: Google Colab
+- **Training Environment**: [Google Colab](https://colab.research.google.com/drive/1z7PLVPJsK61C4fpMBYwg8gqxTQvlqWH3#scrollTo=4WbulURB9SqE)
 - **Database**: Supabase with PostgreSQL
 - **Hosting**: Hugging Face Spaces / Vercel
 - **Other Tools**: React, Next.js, Pythorch, Etc
